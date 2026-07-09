@@ -1,16 +1,20 @@
+#ifndef FIREWALL_RULES
+#define FIREWALL_RULES
 #include "libraries.h"
 
 // action needs to be specific either Block Allow Pass
 #define RuleTableSize 1024
-typedef enum firewall_action {
-  Action_Allow,
-  Action_Block,
-  Action_Pass
-} Firewall_Action;
+typedef enum firewall_action { Action_Allow, Action_Block } Firewall_Action;
 
-typedef enum firewall_protocols { Proto_Tcp, Proto_Udp } Firewall_Protocol;
+typedef enum firewall_protocols {
+  Proto_Tcp = 1 << 0,
+  Proto_Udp = 1 << 1
+} Firewall_Protocol;
 
-typedef enum packet_direction { INCOMMING, OUTGONNING } Direction;
+typedef enum packet_direction {
+  INCOMMING = 1 << 0,
+  OUTGONNING = 1 << 1
+} Direction;
 typedef uint32_t Firewall_Ipv4_Addr;
 typedef uint16_t Firewall_Ipv4_Port;
 
@@ -42,7 +46,8 @@ typedef struct firewall_decision {
 
 } Decision;
 
-// Functions
+bool match_rule(const Packet *packets, const Rule *rules);
+Decision evaluate_rule(const Packet *packets, const Rule *rules, int rule_count,
+                       Firewall_Action *default_action);
 
-bool match_rule(Packet *, Rule *);
-Decision evaluate_rule(Packet *, Rule[RuleTableSize]);
+#endif
