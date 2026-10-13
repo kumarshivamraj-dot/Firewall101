@@ -5,7 +5,6 @@ Firewall_Protocol TcpProtocol = Proto_Tcp;
 Firewall_Protocol UdpProtocol = Proto_Udp;
 
 bool match_rule(const Packet *packets, const Rule *rules) {
-
   bool match = false;
   if (packets == NULL || rules == NULL) {
     return false;

@@ -1,5 +1,6 @@
 #ifndef LIBRARIES_H
 #define LIBRARIES_H
+#include <arpa/inet.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdint.h>

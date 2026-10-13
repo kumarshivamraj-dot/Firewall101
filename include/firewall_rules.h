@@ -46,6 +46,9 @@ typedef struct firewall_decision {
 
 } Decision;
 
+extern Rule rule_table[RuleTableSize];
+extern int rule_table_index;
+
 bool match_rule(const Packet *packets, const Rule *rules);
 Decision evaluate_rule(const Packet *packets, const Rule *rules, int rule_count,
                        Firewall_Action *default_action);
